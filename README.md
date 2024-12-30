@@ -1,36 +1,179 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# To-Do List Application
+A simple, responsive to-do list application built with React, Tailwind CSS, and Prisma, using CockroachDB for data storage.
 
-## Getting Started
+---
 
-First, run the development server:
+## Features
+- Add new tasks with title and description.
+- Mark tasks as complete/incomplete.
+- Edit task details.
+- Delete tasks.
+- Persistent storage with CockroachDB.
+
+---
+
+## Running the Application Locally
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-repo-url.git
+   cd your-repo-name
+
+Install Dependencies: Ensure Node.js and npm are installed. Run:
+
+```bash
+npm install
+```
+
+Set Environment Variables: Create a .env file in the root of the project:
+
+DATABASE_URL=your_cockroachdb_url
+SITE_URL=http://localhost:3000
+
+Run the Application:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit the app at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Deploying the Application
+Set Up Environment Variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ensure the production .env file includes the correct DATABASE_URL pointing to your CockroachDB instance.
+Build the Application:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+Deploy to a Hosting Provider:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Vercel: Connect your GitHub repository, set environment variables, and deploy.
+Netlify or Railway: Follow the platform's deployment instructions.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Run the Server: Deploy the app with the command:
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Setting Up the Database Schema
+Install Prisma CLI:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install prisma --save-dev
+```
+
+Configure Prisma:
+
+Initialize Prisma in the project:
+```bash
+npx prisma init
+```
+
+Update the schema.prisma file with the following:
+
+```bash
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  completed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+}
+```
+
+Run Database Migrations:
+
+Create the migration:
+
+```bash
+npx prisma migrate dev --name init
+```
+
+Prisma will create the necessary tasks table in your database.
+
+Verify Database Connection:
+
+Use 
+```bash 
+npx prisma studio
+```
+ to view the database schema and data.
+
+Testing Database Functionality
+Add a sample task using the app or API.
+
+Verify its presence using Prisma Studio or CoackroachDB SQL queries:
+
+```bash
+SELECT * FROM tasks;
+```
+
+API Endpoints
+GET /api/tasks
+
+Fetch all tasks.
+
+Response:
+
+[
+  {
+    "id": "uuid",
+    "title": "Sample Task",
+    "description": "Description here",
+    "completed": false,
+    "createdAt": "timestamp",
+    "updatedAt": "timestamp",
+    "deletedAt": null
+  }
+]
+
+POST /api/tasks
+Create a new task.
+
+Request Body:
+
+{
+  "title": "New Task",
+  "description": "Task description here"
+}
+
+Response:
+
+{
+  "id": "uuid",
+  "title": "New Task",
+  "description": "Task description here",
+  "completed": false,
+  "createdAt": "timestamp",
+  "updatedAt": "timestamp",
+  "deletedAt": null
+}
+
+PATCH /api/tasks/:id
+Update a task (mark complete, edit title/description).
+
+Request Body:
+
+{
+  "title": "Updated Title",
+  "description": "Updated Description",
+  "completed": true
+}
+
+DELETE /api/tasks/:id
+Delete a task.
