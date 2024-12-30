@@ -1,6 +1,14 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { TaskProvider } from "../context/TaskProvider";
 
+export default function Layout({ children }) {
+  return (
+    <TaskProvider>
+      {children}
+    </TaskProvider>
+  );
+}
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

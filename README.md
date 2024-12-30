@@ -15,9 +15,8 @@ A simple, responsive to-do list application built with React, Tailwind CSS, and 
 ## Running the Application Locally
 
 1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repo-url.git
-   cd your-repo-name
+   git clone https://github.com/jared-pratt/To-Do-List
+   cd to-do-list
 
 Install Dependencies: Ensure Node.js and npm are installed. Run:
 

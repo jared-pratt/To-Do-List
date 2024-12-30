@@ -1,3 +1,4 @@
+// src/app/components/TaskListItem.jsx
 import React from "react";
 import { useTasks } from "../context/TaskProvider";
 
@@ -7,7 +8,9 @@ export default function TaskListItem({ task }) {
   const handleEdit = () => {
     const updatedTitle = prompt("Edit task title:", task.title);
     const updatedDescription = prompt("Edit task description:", task.description);
-    editTask(task.id, updatedTitle, updatedDescription);
+    if (updatedTitle && updatedDescription) {
+      editTask(task.id, updatedTitle, updatedDescription);
+    }
   };
 
   return (

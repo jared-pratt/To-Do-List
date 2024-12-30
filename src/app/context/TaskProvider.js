@@ -1,46 +1,38 @@
-'use client';
-
 import React, { createContext, useContext, useState } from "react";
 
 const TaskContext = createContext();
 
-export function TaskProvider({ children }) {
+export const useTasks = () => useContext(TaskContext);
+
+export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
 
   const addTask = (title, description) => {
-    if (!title.trim() || !description.trim()) return;
-
-    const task = {
-      id: tasks.length + 1,
+    const newTask = {
+      id: Date.now(),
       title,
       description,
       completed: false,
     };
-    setTasks([...tasks, task]);
+    setTasks((prev) => [...prev, newTask]);
   };
 
-  const editTask = (taskId, newTitle, newDescription) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId
-          ? {
-              ...task,
-              title: newTitle || task.title,
-              description: newDescription || task.description,
-            }
-          : task
+  const editTask = (id, title, description) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, title, description } : task
       )
     );
   };
 
-  const removeTask = (taskId) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+  const removeTask = (id) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
-  const toggleCompleteTask = (taskId) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, completed: !task.completed } : task
+  const toggleCompleteTask = (id) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task
       )
     );
   };
@@ -52,8 +44,4 @@ export function TaskProvider({ children }) {
       {children}
     </TaskContext.Provider>
   );
-}
-
-export function useTasks() {
-  return useContext(TaskContext);
 }
