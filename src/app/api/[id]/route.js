@@ -18,7 +18,6 @@ export async function PATCH(request, { params }) {
   const { id } = params;
   try {
     const data = await request.json(); 
-    
     const updatedTask = await prisma.task.update({
       where: { id },
       data, 
@@ -32,9 +31,7 @@ export async function PATCH(request, { params }) {
 export async function DELETE(request, { params }) {
   const { id } = params;
   try {
-    const deletedTask = await prisma.task.delete({
-      where: { id },
-    });
+    const deletedTask = await prisma.task.delete({ where: { id } });
     return NextResponse.json(deletedTask);
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

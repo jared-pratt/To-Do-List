@@ -67,7 +67,6 @@ export function TaskProvider({ children }) {
         throw new Error("Failed to update task");
       }
       const updatedTask = await response.json();
-
       setTasks((prev) =>
         prev.map((task) => (task.id === id ? updatedTask : task))
       );

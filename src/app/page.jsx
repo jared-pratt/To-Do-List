@@ -7,7 +7,7 @@ import TaskList from './components/TaskList';
 export default function Home() {
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold text-center text-white-600 mb-6">
+      <h1 className="text-2xl font-bold text-center mb-6" style={{ color: 'black' }}>
         To-Do List
       </h1>
       <TaskInput />
@@ -28,19 +28,20 @@ function TaskInput() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 mb-6">
+      {/* Make text black here */}
       <input
         type="text"
         placeholder="Task Title"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
       />
       <textarea
         placeholder="Task Description"
         value={newTaskDescription}
         onChange={(e) => setNewTaskDescription(e.target.value)}
-        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
       />
       <button
         onClick={handleAddTask}

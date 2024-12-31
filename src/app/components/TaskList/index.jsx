@@ -7,7 +7,7 @@ import TaskListItem from '../TaskListItem';
 export default function TaskList() {
   const { tasks } = useTasks();
 
-  if (tasks.length === 0) {
+  if (!tasks || tasks.length === 0) {
     return <p className="mt-6 text-gray-500">No tasks available. Add one!</p>;
   }
 
