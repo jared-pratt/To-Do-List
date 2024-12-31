@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="p-6 max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold text-center text-white-600 mb-6">
-        The World's Greatest To-Do List
+        To-Do List
       </h1>
       <TaskInput />
       <TaskList />
