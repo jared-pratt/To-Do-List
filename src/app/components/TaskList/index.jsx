@@ -12,7 +12,7 @@ export default function TaskList() {
   }
 
   return (
-    <ul className="mt-6 space-y-4 border border-gray-300 p-4 rounded">
+    <ul className="mt-6 space-y-4">
       {tasks.map((task) => (
         <TaskListItem key={task.id} task={task} />
       ))}

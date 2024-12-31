@@ -50,7 +50,6 @@ export function TaskProvider({ children }) {
       if (!response.ok) {
         throw new Error("Failed to delete task");
       }
-      // Remove from local state
       setTasks((prev) => prev.filter((task) => task.id !== id));
     } catch (err) {
       console.error(err);
@@ -81,6 +80,7 @@ export function TaskProvider({ children }) {
     try {
       const currentTask = tasks.find((t) => t.id === id);
       if (!currentTask) return;
+
       const response = await fetch(`/api/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

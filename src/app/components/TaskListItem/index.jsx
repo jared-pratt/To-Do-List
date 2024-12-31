@@ -24,7 +24,7 @@ export default function TaskListItem({ task }) {
       }`}
     >
       <div className="flex justify-between items-start">
-        <div className="flex-1 mr-4">
+        <div className="flex-1">
           <h2
             className={`text-lg font-semibold ${
               task.completed ? 'line-through text-gray-500' : 'text-gray-900'
@@ -41,13 +41,12 @@ export default function TaskListItem({ task }) {
           </p>
         </div>
         <div className="flex space-x-2">
-          {/* COMPLETED BUTTON => Green */}
           <button
             onClick={() => toggleCompleteTask(task.id)}
             className={`px-3 py-1 text-sm rounded ${
               task.completed
                 ? 'bg-green-500 text-white'
-                : 'bg-green-500 text-white'
+                : 'bg-yellow-500 text-white'
             }`}
           >
             {task.completed ? 'Undo' : 'Complete'}
