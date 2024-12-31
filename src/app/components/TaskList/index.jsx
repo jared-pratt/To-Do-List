@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import { useTasks } from '@/app/context/TaskProvider';
-import TaskListItem from '@/app/components/TaskListItem';
+// Two levels up to `context/TaskProvider.js`
+import { useTasks } from '../../context/TaskProvider';
+// One level up to `components/`, then into `TaskListItem`
+import TaskListItem from '../TaskListItem';
 
 export default function TaskList() {
   const { tasks } = useTasks();

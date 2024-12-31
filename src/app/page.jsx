@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+// Same folder for context => `./context/TaskProvider`
 import { useTasks } from './context/TaskProvider';
+// `./components/TaskList` (since `page.jsx` is in `app/`)
 import TaskList from './components/TaskList';
 
 export default function Home() {

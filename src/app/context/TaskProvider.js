@@ -6,12 +6,12 @@ const TaskContext = createContext();
 
 export const useTasks = () => useContext(TaskContext);
 
-export const TaskProvider = ({ children }) => {
+export function TaskProvider({ children }) {
   const [tasks, setTasks] = useState([]);
 
   const addTask = (title, description) => {
     const newTask = {
-      id: Date.now(),
+      id: Date.now(), // Using timestamp as ID for now
       title,
       description,
       completed: false,
