@@ -29,7 +29,6 @@ function TaskInput() {
 
   return (
     <div className="space-y-4 mb-6">
-      {/* Make text black here */}
       <input
         type="text"
         placeholder="Task Title"
