@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-// Two levels up to `context/TaskProvider.js`
 import { useTasks } from '../../context/TaskProvider';
-// One level up to `components/`, then into `TaskListItem`
 import TaskListItem from '../TaskListItem';
 
 export default function TaskList() {
@@ -14,7 +12,7 @@ export default function TaskList() {
   }
 
   return (
-    <ul className="mt-6 space-y-4">
+    <ul className="mt-6 space-y-4 border border-gray-300 p-4 rounded">
       {tasks.map((task) => (
         <TaskListItem key={task.id} task={task} />
       ))}
