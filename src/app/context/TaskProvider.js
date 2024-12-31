@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState } from "react";
+'use client';
+
+import React, { createContext, useContext, useState } from 'react';
 
 const TaskContext = createContext();
 
@@ -19,9 +21,7 @@ export const TaskProvider = ({ children }) => {
 
   const editTask = (id, title, description) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, title, description } : task
-      )
+      prev.map((task) => (task.id === id ? { ...task, title, description } : task))
     );
   };
 
@@ -39,9 +39,16 @@ export const TaskProvider = ({ children }) => {
 
   return (
     <TaskContext.Provider
-      value={{ tasks, addTask, editTask, removeTask, toggleCompleteTask }}
+      value={{
+        tasks,
+        addTask,
+        editTask,
+        removeTask,
+        toggleCompleteTask,
+        setTasks,
+      }}
     >
       {children}
     </TaskContext.Provider>
   );
-}
+};

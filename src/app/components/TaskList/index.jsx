@@ -1,7 +1,8 @@
-// src/app/components/TaskList.jsx
-import React from "react";
-import { useTasks } from "../context/TaskProvider";
-import TaskListItem from "./TaskListItem";
+'use client';
+
+import React from 'react';
+import { useTasks } from '@/app/context/TaskProvider';
+import TaskListItem from '@/app/components/TaskListItem';
 
 export default function TaskList() {
   const { tasks } = useTasks();

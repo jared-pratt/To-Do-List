@@ -1,33 +1,25 @@
-// import { NextResponse } from 'next/server';
-// import prisma from '@/lib/prisma';
+import { NextResponse } from 'next/server';
+import prisma from '@/lib/prisma';
 
-// // Fetch all todos
-// export async function GET() {
-//   const tasks = await prisma.task.findMany();
-//   return NextResponse.json(tasks);
-// }
+// GET all tasks
+export async function GET() {
+  try {
+    const tasks = await prisma.task.findMany();
+    return NextResponse.json(tasks);
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
 
-// // Create a new todo
-// export async function POST(req) {
-//   const { title, description } = await req.json();
-//   const newTask = await prisma.task.create({ data: { title, description } });
-
-//   return NextResponse.json(newTask);
-// }
-import { useEffect } from "react";
-import { useTasks } from "../context/TaskProvider";
-
-export default function App() {
-  const { tasks, setTasks } = useTasks();
-
-  useEffect(() => {
-    async function fetchTasks() {
-      const response = await fetch("/api/todos");
-      const data = await response.json();
-      setTasks(data);
-    }
-    fetchTasks();
-  }, []);
-
-  return <TaskList />;
+// POST a new task
+export async function POST(request) {
+  try {
+    const { title, description } = await request.json();
+    const newTask = await prisma.task.create({
+      data: { title, description },
+    });
+    return NextResponse.json(newTask);
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }

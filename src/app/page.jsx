@@ -1,32 +1,30 @@
 'use client';
 
-import React, { useState } from "react";
-import { TaskProvider, useTasks } from './context/TaskProvider';
+import React, { useState } from 'react';
+import { useTasks } from './context/TaskProvider';
 import TaskList from './components/TaskList';
 
 export default function Home() {
   return (
-    <TaskProvider>
-      <div className="p-6 max-w-3xl mx-auto">
-        <h1 className="text-2xl font-bold text-center text-white-600 mb-6">
-          The World's Greatest To-Do List
-        </h1>
-        <TaskInput />
-        <TaskList />
-      </div>
-    </TaskProvider>
+    <div className="p-6 max-w-3xl mx-auto">
+      <h1 className="text-2xl font-bold text-center text-white-600 mb-6">
+        The World's Greatest To-Do List
+      </h1>
+      <TaskInput />
+      <TaskList />
+    </div>
   );
 }
 
 function TaskInput() {
   const { addTask } = useTasks();
-  const [newTask, setNewTask] = useState("");
-  const [newTaskDescription, setNewTaskDescription] = useState("");
+  const [newTask, setNewTask] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState('');
 
   const handleAddTask = () => {
     addTask(newTask, newTaskDescription);
-    setNewTask("");
-    setNewTaskDescription("");
+    setNewTask('');
+    setNewTaskDescription('');
   };
 
   return (
